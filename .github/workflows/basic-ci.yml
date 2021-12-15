@@ -1,0 +1,21 @@
+name: Build and run examples
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    container: gcc:latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build
+        run: |
+          g++ -Wall -Wextra -I./src -o example1 examples/example1.cpp src/eng_format.cpp
+      - name: Test
+        run: |
+          ./example1
