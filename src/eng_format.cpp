@@ -88,32 +88,17 @@ int sign( int const value )
 
 bool is_zero( double const value )
 {
-#if __cplusplus >= 201103L
     return FP_ZERO == fpclassify( value );
-#else
-    // deliberately compare literally:
-    return 0.0 == value;
-#endif
 }
 
 bool is_nan( double const value )
 {
-#if __cplusplus >= 201103L
     return isnan( value );
-#else
-    // deliberately return false for now:
-    return false;
-#endif
 }
 
 bool is_inf( double const value )
 {
-#if __cplusplus >= 201103L
     return isinf( value );
-#else
-    // deliberately return false for now:
-    return false;
-#endif
 }
 
 long degree_of( double const value )
