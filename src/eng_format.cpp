@@ -91,16 +91,6 @@ bool is_zero( double const value )
     return FP_ZERO == fpclassify( value );
 }
 
-bool is_nan( double const value )
-{
-    return isnan( value );
-}
-
-bool is_inf( double const value )
-{
-    return isinf( value );
-}
-
 long degree_of( double const value )
 {
     return is_zero( value ) ? 0 : lrint( floor( log10( fabs( value ) ) / 3) );
@@ -167,8 +157,8 @@ int prefix_to_exponent( std::string const pfx )
 std::string
 to_engineering_string( double const value, int const digits, bool exponential, std::string const unit /*= ""*/, std::string separator /*= " "*/ )
 {
-    if      ( is_nan( value ) ) return "NaN";
-    else if ( is_inf( value ) ) return "INFINITE";
+    if      ( std::isnan( value ) ) return "NaN";
+    else if ( std::isinf( value ) ) return "INFINITE";
 
     const int degree = degree_of( value );
 
