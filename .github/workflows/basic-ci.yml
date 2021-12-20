@@ -23,8 +23,8 @@ jobs:
           g++ -Wall -Wextra -I./include -o example1 src/eng_format.cpp examples/example1.cpp
           g++ -Wall -Wextra -I./include -o demo_eng_format src/eng_format.cpp examples/demo_eng_format.cpp
           g++ -Wall -Wextra -I./include -o demo_factors src/eng_format.cpp examples/demo_factors.cpp
-          cd test && make
           cmake --build builddir
+          cd test && make
       - name: Run examples
         run: |
           ./example1
