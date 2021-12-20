@@ -23,3 +23,6 @@
 
 # Compiled help files
 *.chm
+
+# Build directory
+build/
