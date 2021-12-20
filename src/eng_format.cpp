@@ -71,16 +71,6 @@ char const * const prefixes[/*exp*/][2][9] =
 
 const int prefix_count = ENG_FORMAT_DIMENSION_OF( prefixes[false][false]  );
 
-#if defined( _MSC_VER )
-
-template <typename T>
-long lrint( T const x )
-{
-    return static_cast<long>( x );
-}
-
-#endif
-
 int sign( int const value )
 {
     return value == 0 ? +1 : value / abs( value );
