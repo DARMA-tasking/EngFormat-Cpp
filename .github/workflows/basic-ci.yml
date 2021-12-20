@@ -15,7 +15,11 @@ jobs:
         uses: actions/checkout@v2
       - name: Build
         run: |
-          g++ -Wall -Wextra -I./src -o example1 examples/example1.cpp src/eng_format.cpp
+          g++ -Wall -Wextra -I./src -o example1 src/eng_format.cpp examples/example1.cpp
+          g++ -Wall -Wextra -I./src -o demo_eng_format src/eng_format.cpp examples/demo_eng_format.cpp
+          g++ -Wall -Wextra -I./src -o demo_factors src/eng_format.cpp examples/demo_factors.cpp
       - name: Test
         run: |
           ./example1
+          ./demo_eng_format
+          ./demo_factors
