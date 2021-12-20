@@ -179,7 +179,7 @@ const lest::test specification[] =
         EXPECT( "NaN"      == to_engineering_string( NAN     , 3, eng_prefixed ) );
         EXPECT( "INFINITE" == to_engineering_string( INFINITY, 3, eng_exponential ) );
 
-#pragma warning "FIX ME!"
+        // FIXME!
         //EXPECT( isnan(  from_engineering_string( " " ) ) );
         //EXPECT( isnan(  from_engineering_string( "Howdie" ) ) );
         //EXPECT( isnan(  from_engineering_string( "1 Q" ) ) );
