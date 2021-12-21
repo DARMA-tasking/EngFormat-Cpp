@@ -7,5 +7,11 @@ target_include_directories(EngFormat-Cpp PUBLIC
   $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
-add_subdirectory(test)
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+  include(CTest)
+endif()
+
+if(BUILD_TESTING)
+  add_subdirectory(test)
+endif()
 
