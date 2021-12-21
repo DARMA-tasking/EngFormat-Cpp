@@ -71,16 +71,6 @@ char const * const prefixes[/*exp*/][2][9] =
 
 const int prefix_count = ENG_FORMAT_DIMENSION_OF( prefixes[false][false]  );
 
-#if defined( _MSC_VER )
-
-template <typename T>
-long lrint( T const x )
-{
-    return static_cast<long>( x );
-}
-
-#endif
-
 int sign( int const value )
 {
     return value == 0 ? +1 : value / abs( value );
@@ -88,32 +78,7 @@ int sign( int const value )
 
 bool is_zero( double const value )
 {
-#if __cplusplus >= 201103L
     return FP_ZERO == fpclassify( value );
-#else
-    // deliberately compare literally:
-    return 0.0 == value;
-#endif
-}
-
-bool is_nan( double const value )
-{
-#if __cplusplus >= 201103L
-    return isnan( value );
-#else
-    // deliberately return false for now:
-    return false;
-#endif
-}
-
-bool is_inf( double const value )
-{
-#if __cplusplus >= 201103L
-    return isinf( value );
-#else
-    // deliberately return false for now:
-    return false;
-#endif
 }
 
 long degree_of( double const value )
@@ -182,8 +147,8 @@ int prefix_to_exponent( std::string const pfx )
 std::string
 to_engineering_string( double const value, int const digits, bool exponential, std::string const unit /*= ""*/, std::string separator /*= " "*/ )
 {
-    if      ( is_nan( value ) ) return "NaN";
-    else if ( is_inf( value ) ) return "INFINITE";
+    if      ( std::isnan( value ) ) return "NaN";
+    else if ( std::isinf( value ) ) return "INFINITE";
 
     const int degree = degree_of( value );
 

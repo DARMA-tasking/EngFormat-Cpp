@@ -9,6 +9,8 @@
 *.o
 *.obj
 
+*.out
+
 # Compiled Dynamic libraries
 *.so
 *.dll
@@ -21,3 +23,7 @@
 
 # Compiled help files
 *.chm
+
+# Build directory
+build/
+builddir/
