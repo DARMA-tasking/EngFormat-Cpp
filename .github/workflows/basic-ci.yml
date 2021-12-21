@@ -30,6 +30,10 @@ jobs:
           ./example1
           ./demo_eng_format
           ./demo_factors
-      - name: Run tests
+      - name: Run tests (Makefile)
         run: |
           cd test && make check
+      - name: Run tests (CMake)
+        run: |
+          cd builddir
+          ctest --output-on-failure

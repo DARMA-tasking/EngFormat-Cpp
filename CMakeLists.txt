@@ -1,9 +1,9 @@
 project(EngFormat-Cpp CXX)
 cmake_minimum_required(VERSION 3.0)
 
-add_library(EngFormat-Cpp include/eng_format.hpp src/eng_format.cpp)
+add_library(${PROJECT_NAME} include/eng_format.hpp src/eng_format.cpp)
 
-target_include_directories(EngFormat-Cpp PUBLIC
+target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
