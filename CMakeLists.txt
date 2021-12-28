@@ -9,10 +9,9 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   include(CTest)
-endif()
-
-if(BUILD_TESTING)
-  target_compile_definitions(${PROJECT_NAME} PRIVATE ENG_FORMAT_MICRO_GLYPH="u")
-  add_subdirectory(test)
+  if(BUILD_TESTING)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE ENG_FORMAT_MICRO_GLYPH="u")
+    add_subdirectory(test)
+  endif()
 endif()
 
