@@ -37,10 +37,10 @@
  */
 
 /*
- * Note: micro, µ, may not work everywhere, so you can define a glyph yourself:
+ * Note: micro, Âµ, may not work everywhere, so you can define a glyph yourself:
  */
 #ifndef ENG_FORMAT_MICRO_GLYPH
-# define ENG_FORMAT_MICRO_GLYPH "µ"
+# define ENG_FORMAT_MICRO_GLYPH "Âµ"
 #endif
 
 /*
