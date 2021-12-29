@@ -22,13 +22,13 @@
 
 #include "eng_format.hpp"
 
+#include <cmath>
 #include <iomanip>
 #include <limits>
 #include <sstream>
 
 #include <ctype.h>
 #include <float.h>
-#include <math.h>
 #include <stdlib.h>
 
 /*
@@ -78,7 +78,7 @@ int sign( int const value )
 
 bool is_zero( double const value )
 {
-    return FP_ZERO == fpclassify( value );
+    return FP_ZERO == std::fpclassify( value );
 }
 
 long degree_of( double const value )
