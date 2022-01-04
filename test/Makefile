@@ -19,7 +19,7 @@
 # THE SOFTWARE.
 
 SOURCES  = test_eng_format.cpp ../src/eng_format.cpp
-HEADERS  = ../include/eng_format.hpp
+HEADERS  = ../include/EngFormat-Cpp/eng_format.hpp
 
 OBJECTS  = $(patsubst %.cpp, %.o, $(SOURCES))
 

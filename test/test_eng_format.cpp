@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 
 #include "lest.hpp"
-#include "eng_format.hpp"
+#include <EngFormat-Cpp/eng_format.hpp>
 
 #include <cmath>
 #include <iostream>
