@@ -20,27 +20,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "eng_format.hpp"
+#include "EngFormat-Cpp/eng_format.hpp"
 
+#include <cctype>
+#include <cfloat>
+#include <cmath>
 #include <iomanip>
 #include <limits>
 #include <sstream>
 
-#include <ctype.h>
-#include <float.h>
-#include <math.h>
-#include <stdlib.h>
-
 /*
- * Note: using fabs() and other math functions in global namespace for
- * best compiler coverage.
- */
-
-/*
- * Note: micro, µ, may not work everywhere, so you can define a glyph yourself:
+ * Note: micro, Âµ, may not work everywhere, so you can define a glyph yourself:
  */
 #ifndef ENG_FORMAT_MICRO_GLYPH
-# define ENG_FORMAT_MICRO_GLYPH "µ"
+# define ENG_FORMAT_MICRO_GLYPH "Âµ"
 #endif
 
 /*
@@ -73,17 +66,18 @@ const int prefix_count = ENG_FORMAT_DIMENSION_OF( prefixes[false][false]  );
 
 int sign( int const value )
 {
-    return value == 0 ? +1 : value / abs( value );
+    return value == 0 ? +1 : value / std::abs( value );
 }
 
 bool is_zero( double const value )
 {
-    return FP_ZERO == fpclassify( value );
+    return FP_ZERO == std::fpclassify( value );
 }
 
 long degree_of( double const value )
 {
-    return is_zero( value ) ? 0 : lrint( floor( log10( fabs( value ) ) / 3) );
+    return is_zero( value ) ?
+        0 : std::lrint( std::floor( std::log10( std::fabs( value ) ) / 3) );
 }
 
 int precision( double const scaled, int const digits )
@@ -91,12 +85,13 @@ int precision( double const scaled, int const digits )
     // MSVC6 requires -2 * DBL_EPSILON;
     // g++ 4.8.1: ok with -1 * DBL_EPSILON
 
-    return is_zero( scaled ) ? digits - 1 : digits - log10( fabs( scaled ) ) - 2 * DBL_EPSILON;
+    return is_zero( scaled ) ?
+        digits - 1 : digits - std::log10( std::fabs( scaled ) ) - 2 * DBL_EPSILON;
 }
 
 std::string prefix_or_exponent( bool const exponential, int const degree, std::string separator )
 {
-    return std::string( exponential || 0 == degree ? "" : separator ) + prefixes[ exponential ][ sign(degree) > 0 ][ abs( degree ) ];
+    return std::string( exponential || 0 == degree ? "" : separator ) + prefixes[ exponential ][ sign(degree) > 0 ][ std::abs( degree ) ];
 }
 
 std::string exponent( int const degree )
@@ -108,7 +103,7 @@ std::string exponent( int const degree )
 
 char const * first_non_space( char const * text )
 {
-    while ( *text && isspace( *text ) )
+    while ( *text && std::isspace( *text ) )
     {
         ++text;
     }
@@ -154,7 +149,7 @@ to_engineering_string( double const value, int const digits, bool exponential, s
 
     std::string factor;
 
-    if ( abs( degree ) < prefix_count )
+    if ( std::abs( degree ) < prefix_count )
     {
         factor = prefix_or_exponent( exponential, degree, separator );
     }
@@ -166,7 +161,7 @@ to_engineering_string( double const value, int const digits, bool exponential, s
 
     std::ostringstream os;
 
-    const double scaled = value * pow( 1000.0, -degree );
+    const double scaled = value * std::pow( 1000.0, -degree );
 
     const std::string space = ( 0 == degree || exponential ) && unit.length() ? separator : "";
 
@@ -190,7 +185,7 @@ double from_engineering_string( std::string const text )
     char * tail;
     const double magnitude = strtod( text.c_str(), &tail );
 
-    return magnitude * pow( 10.0, prefix_to_exponent( first_non_space( tail ) ) );
+    return magnitude * std::pow( 10.0, prefix_to_exponent( first_non_space( tail ) ) );
 }
 
 /**
@@ -206,10 +201,11 @@ std::string step_engineering_string( std::string const text, int digits, bool co
     }
 
     // correctly round to desired precision
-    const int expof10 = is_zero(value) ? 0 : lrint( floor( log10( value ) ) );
+    const int expof10 = is_zero(value) ?
+        0 : std::lrint( std::floor( std::log10( value ) ) );
     const int   power = expof10 + 1 - digits;
 
-    const double  inc = pow( 10.0, power ) * ( positive ? +1 : -1 );
+    const double  inc = std::pow( 10.0, power ) * ( positive ? +1 : -1 );
     const double  ret = value + inc;
 
     return to_engineering_string( ret, digits, exponential );

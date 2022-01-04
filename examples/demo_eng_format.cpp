@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include "eng_format.hpp"
+#include <EngFormat-Cpp/eng_format.hpp>
 
 #include <iomanip>
 #include <iostream>

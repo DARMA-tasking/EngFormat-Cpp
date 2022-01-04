@@ -71,8 +71,8 @@ extern struct eng_exponential_t {} eng_exponential;
  * \brief let step_engineering_string() make a negative step.
  */
 
-const bool eng_increment = true;
-const bool eng_decrement = false;
+constexpr bool eng_increment = true;
+constexpr bool eng_decrement = false;
 
 /**
  * convert a double to the specified number of digits in SI (prefix) notation,
