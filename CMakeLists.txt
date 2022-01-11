@@ -15,3 +15,8 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   endif()
 endif()
 
+install(
+  DIRECTORY                include/EngFormat-Cpp
+  DESTINATION              include
+  FILES_MATCHING PATTERN   "*"
+)
